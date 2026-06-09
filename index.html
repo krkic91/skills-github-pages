@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Interactive practice quiz for the Microsoft GH-300 GitHub Copilot Certification exam. 125 real exam questions with English, Vietnamese, and Japanese translations. Practice Mode and timed Exam Mode available.">
+  <meta property="og:title" content="GH-300 GitHub Copilot Certification Quiz">
+  <meta property="og:description" content="Practice for the Microsoft GH-300 exam with 125 questions, multi-language support (EN/VI/JA), and full exam simulation.">
+  <title>GH-300 GitHub Copilot Certification Quiz | Practice &amp; Exam Mode</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js" defer></script>
+  <script src="questions_data.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+
+  <!-- Drawer Navigator Overlay -->
+  <div id="drawer-overlay" class="nav-drawer-overlay"></div>
+  <div id="drawer" class="nav-drawer">
+    <div class="drawer-header">
+      <h3>Question Navigator</h3>
+      <button id="btn-close-drawer" class="btn-close-drawer">&times;</button>
+    </div>
+    <div class="drawer-content">
+      <div id="drawer-grid" class="drawer-grid">
+        <!-- Buttons 1-125 generated dynamically -->
+      </div>
+      <button id="btn-drawer-finish" class="btn btn-primary" style="width: 100%; margin-top: 2rem; display: none;">
+        Finish Exam
+      </button>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="brand">
+      <div class="brand-icon">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/>
+        </svg>
+      </div>
+      <h1>GH-300 Certification Prep</h1>
+    </div>
+    
+    <div class="header-controls">
+      <!-- Language controls -->
+      <div class="lang-controls">
+        <button id="btn-lang-en" class="btn-lang active">EN</button>
+        <button id="btn-lang-vi" class="btn-lang">VI</button>
+        <button id="btn-lang-ja" class="btn-lang">JA</button>
+      </div>
+
+      <!-- Question Menu (Only in Quiz) -->
+      <button id="btn-menu" class="btn-nav-drawer" style="display: none;" title="Open Question Navigator">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main>
+    <div class="container">
+      <div class="quiz-card">
+
+        <!-- SCREEN 1: Welcome Screen -->
+        <div id="welcome-screen" class="screen active">
+          <h2>GitHub Copilot Certification Exam</h2>
+          <p>
+            Welcome to the interactive practice dashboard for the <strong>Microsoft GH-300 (GitHub Copilot)</strong> certification. 
+            All 125 actual exam questions are parsed and available. Select your preferred mode below to get started.
+          </p>
+
+          <div class="mode-grid">
+            <div id="practice-card" class="mode-card">
+              <div class="mode-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 20h9"></path>
+                  <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                </svg>
+              </div>
+              <div class="mode-title">Practice Mode</div>
+              <div class="mode-desc">Learn at your own pace. See correct answers and full reference explanations instantly after submitting.</div>
+            </div>
+
+            <div id="exam-card" class="mode-card">
+              <div class="mode-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+              </div>
+              <div class="mode-title">Exam Mode</div>
+              <div class="mode-desc">Simulate the real testing environment. 120 minutes timer, randomized options, answers revealed only at completion.</div>
+            </div>
+
+            <div id="study-card" class="mode-card" style="grid-column: span 2;">
+              <div class="mode-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                  <path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5v-15z"></path>
+                </svg>
+              </div>
+              <div class="mode-title">Study Cheat Sheet</div>
+              <div class="mode-desc">Scroll through all 125 questions, answers, and references. Fully searchable in English, Vietnamese, or Japanese.</div>
+            </div>
+          </div>
+
+          <button id="btn-start" class="btn btn-primary" style="width: 200px;" disabled>
+            Start Quiz
+          </button>
+        </div>
+
+        <!-- SCREEN 2: Quiz Active Screen -->
+        <div id="quiz-screen" class="screen">
+          <div class="quiz-top-bar">
+            <!-- Selector Details -->
+            <span id="select-info-badge" style="font-size:0.85rem; font-weight:600; color:var(--text-secondary); background:rgba(255,255,255,0.05); padding:0.25rem 0.6rem; border-radius:12px;">
+              Select 1 option
+            </span>
+
+            <!-- Timer (Exam mode only) -->
+            <div id="timer-container" class="timer-box" style="display: none;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+              <span id="timer">120:00</span>
+            </div>
+          </div>
+
+          <!-- Progress -->
+          <div class="progress-container">
+            <div class="progress-info">
+              <span id="progress-text">Question 1 of 125</span>
+            </div>
+            <div class="progress-track">
+              <div id="progress-fill" class="progress-fill"></div>
+            </div>
+          </div>
+
+          <!-- Question Area -->
+          <div class="question-area">
+            <div id="question-text" class="question-text">
+              When can GitHub Copilot still use content that was excluded using content exclusion?
+            </div>
+            
+            <div id="options-container" class="options-container">
+              <!-- Shuffled option cards generated dynamically -->
+            </div>
+          </div>
+
+          <!-- Explanation Panel (revealed after submitting in Practice Mode) -->
+          <div id="explanation-panel" class="explanation-panel" style="display: none;">
+            <div class="explanation-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+              Explanation
+            </div>
+            <div id="explanation-text" class="explanation-text">
+              "If excluded content is referenced by non-excluded code, such as through function calls, Copilot may still use that reference context." This confirms that excluded content can indirectly appear if referenced elsewhere.
+            </div>
+            <div id="explanation-refs" class="explanation-refs">
+              References: GitHub Copilot content exclusions limitations documentation.
+            </div>
+          </div>
+
+          <!-- Actions Footer -->
+          <div class="action-area">
+            <button id="btn-prev" class="btn btn-secondary">
+              &larr; Previous
+            </button>
+            
+            <div style="display:flex; gap:0.5rem;">
+              <button id="btn-submit" class="btn btn-primary" disabled>
+                Submit
+              </button>
+              <button id="btn-next" class="btn btn-primary" style="display: none;">
+                Next &rarr;
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- SCREEN 3: Results Summary Screen -->
+        <div id="results-screen" class="screen">
+          <div class="results-screen">
+            <h2 id="results-title">Congratulations! 🎉</h2>
+            
+            <div class="score-radial">
+              <svg class="radial-svg" width="160" height="160">
+                <circle class="radial-bg" cx="80" cy="80" r="70"></circle>
+                <circle id="radial-progress" class="radial-progress" cx="80" cy="80" r="70"></circle>
+              </svg>
+              <div class="score-text">
+                <span id="score-num" class="score-num">85%</span>
+                <span id="score-label" class="score-label">Passed</span>
+              </div>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+              <div class="stat-card">
+                <div id="stat-correct" class="stat-val correct">106</div>
+                <div class="stat-label">Correct Answers</div>
+              </div>
+              <div class="stat-card">
+                <div id="stat-incorrect" class="stat-val incorrect">19</div>
+                <div class="stat-label">Incorrect Answers</div>
+              </div>
+              <div class="stat-card">
+                <div id="stat-time-val" class="stat-val">34m 12s</div>
+                <div id="stat-time-label" class="stat-label">Time Taken</div>
+              </div>
+            </div>
+
+            <!-- Buttons -->
+            <div style="display:flex; justify-content:center; gap:1rem; margin-bottom:2rem;">
+              <button id="btn-restart" class="btn btn-primary">
+                Try Again
+              </button>
+            </div>
+
+            <!-- Incorrect Questions Review List -->
+            <div id="review-list" class="review-list">
+              <h3>Review Incorrect Answers</h3>
+              <div id="review-list-container">
+                <!-- Incorrect items list generated dynamically -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SCREEN 4: Study/Cheat Sheet Screen -->
+        <div id="study-screen" class="screen">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem;">
+            <h2 style="font-family: var(--font-family-title); font-size:1.75rem; font-weight:800;">Study Cheat Sheet</h2>
+            <button id="btn-restart-study" class="btn btn-secondary">
+              &#8592; Back to Modes
+            </button>
+          </div>
+
+          <div style="margin-bottom:2rem; position:relative;">
+            <input type="text" id="study-search" placeholder="Search questions, options, or explanations..." style="width:100%; padding:1rem; border-radius:var(--border-radius-md); border:1px solid var(--border-color); background:rgba(255,255,255,0.02); color:var(--text-primary); font-family:var(--font-family-body); font-size:0.95rem; outline:none; transition:var(--transition-smooth);" onfocus="this.style.borderColor='var(--accent-color)'" onblur="this.style.borderColor='var(--border-color)'">
+          </div>
+
+          <div id="study-list-container">
+            <!-- All questions rendered in readable form -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>
