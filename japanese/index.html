@@ -25,6 +25,31 @@
     </div>
   </header>
 
+  <div id="navigator-overlay" class="navigator-overlay" aria-hidden="true"></div>
+  <aside id="question-navigator" class="question-navigator" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="navigator-title">
+    <div class="navigator-header">
+      <div>
+        <p class="eyebrow" data-i18n="questionNavigator">Điều hướng</p>
+        <h2 id="navigator-title" data-i18n="questionList">Danh sách câu hỏi</h2>
+      </div>
+      <button id="close-navigator-button" class="navigator-close" type="button" aria-label="Đóng danh sách câu hỏi">×</button>
+    </div>
+    <p id="navigator-summary" class="navigator-summary"></p>
+    <form id="jump-form" class="jump-form">
+      <label for="jump-input" data-i18n="goToQuestion">Đi nhanh đến câu</label>
+      <div>
+        <input id="jump-input" type="number" min="1" inputmode="numeric" data-i18n-placeholder="questionNumberPlaceholder" placeholder="Nhập số câu">
+        <button type="submit" data-i18n="go">Đi</button>
+      </div>
+    </form>
+    <div class="navigator-legend" aria-label="Chú thích trạng thái">
+      <span><i class="legend-dot current"></i><span data-i18n="currentQuestion">Đang xem</span></span>
+      <span><i class="legend-dot answered"></i><span data-i18n="answeredQuestion">Đã trả lời</span></span>
+      <span><i class="legend-dot pending"></i><span data-i18n="pendingQuestion">Chưa trả lời</span></span>
+    </div>
+    <div id="question-navigator-grid" class="question-navigator-grid"></div>
+  </aside>
+
   <main class="app-shell">
     <div id="data-error" class="error-banner" role="alert" hidden></div>
 
@@ -109,9 +134,16 @@
         <div class="workspace-topbar">
           <button id="exit-quiz-button" class="text-button" type="button" data-i18n="backToSetup">← Chọn lại</button>
           <span id="quiz-topic-label" class="topic-pill"></span>
-          <div id="timer-box" class="timer-box" hidden aria-live="polite">
-            <span aria-hidden="true">◷</span>
-            <span id="timer-value">00:00</span>
+          <div class="workspace-tools">
+            <button id="open-navigator-button" class="navigator-trigger" type="button" aria-haspopup="dialog" aria-controls="question-navigator">
+              <span aria-hidden="true">▦</span>
+              <span data-i18n="questionListShort">Danh sách câu</span>
+              <strong id="navigator-progress">0/0</strong>
+            </button>
+            <div id="timer-box" class="timer-box" hidden aria-live="polite">
+              <span aria-hidden="true">◷</span>
+              <span id="timer-value">00:00</span>
+            </div>
           </div>
         </div>
 

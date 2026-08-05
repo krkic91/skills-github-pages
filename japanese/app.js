@@ -57,6 +57,17 @@ const I18N = {
     timeUp: 'Đã hết thời gian. Bài kiểm tra sẽ được nộp tự động.',
     finishPractice: 'Xem kết quả',
     dataError: 'Không thể tải dữ liệu câu hỏi. Hãy chạy node scripts/build-japanese-data.mjs trước khi mở trang.',
+    questionNavigator: 'Điều hướng',
+    questionList: 'Danh sách câu hỏi',
+    questionListShort: 'Danh sách câu',
+    goToQuestion: 'Đi nhanh đến câu',
+    questionNumberPlaceholder: 'Nhập số câu',
+    go: 'Đi',
+    currentQuestion: 'Đang xem',
+    answeredQuestion: 'Đã trả lời',
+    pendingQuestion: 'Chưa trả lời',
+    navigatorSummary: '{answered}/{total} câu đã trả lời',
+    questionAriaLabel: 'Đi đến câu {number} ({id})',
   },
   ja: {
     home: '← ホーム',
@@ -116,6 +127,17 @@ const I18N = {
     timeUp: '時間切れです。テストを自動的に提出します。',
     finishPractice: '結果を見る',
     dataError: '問題データを読み込めません。ページを開く前に node scripts/build-japanese-data.mjs を実行してください。',
+    questionNavigator: 'ナビゲーション',
+    questionList: '問題一覧',
+    questionListShort: '問題一覧',
+    goToQuestion: '問題番号へ移動',
+    questionNumberPlaceholder: '問題番号',
+    go: '移動',
+    currentQuestion: '表示中',
+    answeredQuestion: '回答済み',
+    pendingQuestion: '未回答',
+    navigatorSummary: '{total}問中{answered}問回答済み',
+    questionAriaLabel: '問題{number}へ移動（{id}）',
   },
 };
 
@@ -176,6 +198,20 @@ function bindEventListeners() {
   document.getElementById('exit-study-button').addEventListener('click', () => showScreen('setup-screen'));
   document.getElementById('retry-button').addEventListener('click', startSession);
   document.getElementById('back-setup-button').addEventListener('click', () => showScreen('setup-screen'));
+  document.getElementById('open-navigator-button').addEventListener('click', openNavigator);
+  document.getElementById('close-navigator-button').addEventListener('click', () => closeNavigator());
+  document.getElementById('navigator-overlay').addEventListener('click', () => closeNavigator());
+  document.getElementById('jump-form').addEventListener('submit', (event) => {
+    event.preventDefault();
+    const input = document.getElementById('jump-input');
+    const number = Number(input.value);
+    if (Number.isInteger(number) && number >= 1 && number <= state.questions.length) {
+      goToQuestion(number - 1);
+      input.value = '';
+    } else {
+      input.focus();
+    }
+  });
 
   document.getElementById('study-search').addEventListener('input', (event) => {
     state.studyQuery = event.target.value;
@@ -184,6 +220,10 @@ function bindEventListeners() {
   });
 
   document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && document.getElementById('question-navigator').classList.contains('open')) {
+      closeNavigator();
+      return;
+    }
     if (state.currentScreen !== 'quiz-screen' || event.altKey || event.ctrlKey || event.metaKey) return;
     const optionIndex = Number(event.key) - 1;
     if (optionIndex >= 0 && optionIndex <= 8) {
@@ -439,6 +479,7 @@ function shuffle(items) {
 
 function resetActiveSession() {
   clearInterval(state.timerId);
+  closeNavigator(false);
   state.timerId = null;
   state.deadline = null;
   state.questions = [];
@@ -450,6 +491,8 @@ function resetActiveSession() {
   state.timeSpent = 0;
   state.studyQuery = '';
   document.getElementById('study-search').value = '';
+  document.getElementById('question-navigator-grid').replaceChildren();
+  document.getElementById('navigator-progress').textContent = '0/0';
 }
 
 function startSession() {
@@ -479,6 +522,7 @@ function startSession() {
       optionOrder: shuffle(question.options.map(({ id }) => id)),
     },
   ]));
+  renderNavigatorGrid();
 
   if (state.mode === 'exam') {
     state.sessionDuration = state.questions.length * 60;
@@ -628,6 +672,98 @@ function renderQuestion() {
     nextButton.hidden = false;
     nextButton.textContent = state.currentIndex === state.questions.length - 1 ? t('submitExam') : t('next');
   }
+  updateNavigatorState();
+}
+
+function renderNavigatorGrid() {
+  const grid = document.getElementById('question-navigator-grid');
+  const input = document.getElementById('jump-input');
+  const fragment = document.createDocumentFragment();
+
+  input.max = String(state.questions.length);
+  state.questions.forEach((question, index) => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'navigator-question';
+    button.dataset.questionIndex = String(index);
+    button.textContent = String(index + 1);
+    button.title = question.id;
+    button.addEventListener('click', () => goToQuestion(index));
+    fragment.append(button);
+  });
+  grid.replaceChildren(fragment);
+  updateNavigatorState();
+}
+
+function updateNavigatorState() {
+  const buttons = document.getElementById('question-navigator-grid').children;
+  if (buttons.length !== state.questions.length) return;
+
+  let answered = 0;
+  state.questions.forEach((question, index) => {
+    const response = state.responses.get(question.id);
+    const button = buttons[index];
+    button.className = 'navigator-question';
+    button.classList.toggle('current', index === state.currentIndex);
+    button.setAttribute('aria-current', index === state.currentIndex ? 'step' : 'false');
+    button.setAttribute('aria-label', t('questionAriaLabel', {
+      number: formatNumber(index + 1),
+      id: question.id,
+    }));
+
+    if (response?.isAnswered) {
+      answered += 1;
+      if (state.mode === 'practice') {
+        button.classList.add(response.isCorrect ? 'correct' : 'incorrect');
+      } else {
+        button.classList.add('answered');
+      }
+    }
+    if (index === state.currentIndex) button.classList.add('current');
+  });
+
+  document.getElementById('navigator-progress').textContent = `${formatNumber(state.currentIndex + 1)}/${formatNumber(state.questions.length)}`;
+  document.getElementById('navigator-summary').textContent = t('navigatorSummary', {
+    answered: formatNumber(answered),
+    total: formatNumber(state.questions.length),
+  });
+}
+
+function openNavigator() {
+  if (state.currentScreen !== 'quiz-screen') return;
+  const navigator = document.getElementById('question-navigator');
+  const overlay = document.getElementById('navigator-overlay');
+  navigator.classList.add('open');
+  navigator.setAttribute('aria-hidden', 'false');
+  overlay.classList.add('open');
+  overlay.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('navigator-open');
+  updateNavigatorState();
+  requestAnimationFrame(() => {
+    const current = document.querySelector('.navigator-question.current');
+    current?.scrollIntoView({ block: 'center' });
+    document.getElementById('close-navigator-button').focus();
+  });
+}
+
+function closeNavigator(restoreFocus = true) {
+  const navigator = document.getElementById('question-navigator');
+  const overlay = document.getElementById('navigator-overlay');
+  if (!navigator || !overlay) return;
+  const wasOpen = navigator.classList.contains('open');
+  navigator.classList.remove('open');
+  navigator.setAttribute('aria-hidden', 'true');
+  overlay.classList.remove('open');
+  overlay.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('navigator-open');
+  if (restoreFocus && wasOpen) document.getElementById('open-navigator-button').focus();
+}
+
+function goToQuestion(index) {
+  if (!Number.isInteger(index) || index < 0 || index >= state.questions.length) return;
+  state.currentIndex = index;
+  renderQuestion();
+  closeNavigator();
 }
 
 function startTimer() {
@@ -651,6 +787,7 @@ function updateTimer() {
 
 function finishSession() {
   clearInterval(state.timerId);
+  closeNavigator(false);
   state.timerId = null;
 
   state.responses.forEach((response, questionId) => {
