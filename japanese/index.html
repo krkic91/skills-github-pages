@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Luyện tập 1.192 câu hỏi và đọc tài liệu song ngữ Việt–Nhật về văn hóa, địa lý, lịch sử và đời sống Nhật Bản.">
+  <meta property="og:title" content="Học về Nhật Bản | Quiz Việt–Nhật">
+  <meta property="og:description" content="8 bộ quiz, 2 tài liệu đọc và 3 chế độ học tập bằng tiếng Việt hoặc tiếng Nhật.">
+  <title>Học về Nhật Bản | Quiz Việt–Nhật</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="topics.js" defer></script>
+  <script src="questions_data.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="back-link" href="../" data-i18n="home">← Trang chủ</a>
+    <div class="header-brand">
+      <span class="brand-mark" aria-hidden="true">日</span>
+      <span class="header-title" data-i18n="brand">Học về Nhật Bản</span>
+    </div>
+    <div class="language-switch" aria-label="Language">
+      <button id="lang-vi" class="language-button active" type="button" aria-pressed="true">VI</button>
+      <button id="lang-ja" class="language-button" type="button" aria-pressed="false">JA</button>
+    </div>
+  </header>
+
+  <main class="app-shell">
+    <div id="data-error" class="error-banner" role="alert" hidden></div>
+
+    <section id="setup-screen" class="screen active" aria-labelledby="setup-title">
+      <div class="hero">
+        <span class="eyebrow" data-i18n="eyebrow">Khám phá • Luyện tập • Ghi nhớ</span>
+        <h1 id="setup-title" data-i18n="heroTitle">Hiểu Nhật Bản, từng câu một.</h1>
+        <p data-i18n="heroDescription">Chọn một chủ đề, học theo nhịp của bạn và đối chiếu nội dung bằng tiếng Việt hoặc tiếng Nhật.</p>
+        <div class="hero-stats" aria-label="Thống kê nội dung">
+          <span><strong id="hero-question-count">1.192</strong> <span data-i18n="questions">câu hỏi</span></span>
+          <span><strong>8</strong> <span data-i18n="quizSets">bộ quiz</span></span>
+          <span><strong>2</strong> <span data-i18n="materials">tài liệu</span></span>
+        </div>
+      </div>
+
+      <section class="content-section" aria-labelledby="quiz-topics-title">
+        <div class="section-heading">
+          <div>
+            <span class="section-number">01</span>
+            <h2 id="quiz-topics-title" data-i18n="chooseTopic">Chọn bộ câu hỏi</h2>
+          </div>
+          <p data-i18n="chooseTopicHelp">Bạn có thể học từng chủ đề hoặc trộn toàn bộ ngân hàng câu hỏi.</p>
+        </div>
+        <div id="quiz-topic-grid" class="topic-grid"></div>
+      </section>
+
+      <section id="mode-section" class="content-section selection-panel disabled" aria-labelledby="mode-title" aria-disabled="true">
+        <div class="section-heading">
+          <div>
+            <span class="section-number">02</span>
+            <h2 id="mode-title" data-i18n="chooseMode">Chọn chế độ</h2>
+          </div>
+          <p id="selection-summary" data-i18n="selectTopicFirst">Hãy chọn một bộ câu hỏi trước.</p>
+        </div>
+
+        <div class="mode-grid">
+          <button class="mode-card" type="button" data-mode="practice" disabled>
+            <span class="mode-icon" aria-hidden="true">練</span>
+            <span class="mode-copy">
+              <strong data-i18n="practice">Luyện tập</strong>
+              <small data-i18n="practiceDescription">Xem đáp án ngay sau mỗi câu.</small>
+            </span>
+          </button>
+          <button class="mode-card" type="button" data-mode="exam" disabled>
+            <span class="mode-icon" aria-hidden="true">試</span>
+            <span class="mode-copy">
+              <strong data-i18n="exam">Kiểm tra</strong>
+              <small data-i18n="examDescription">Có giới hạn thời gian, xem đáp án khi nộp.</small>
+            </span>
+          </button>
+          <button class="mode-card" type="button" data-mode="study" disabled>
+            <span class="mode-icon" aria-hidden="true">学</span>
+            <span class="mode-copy">
+              <strong data-i18n="study">Ôn tập</strong>
+              <small data-i18n="studyDescription">Đọc, tra cứu câu hỏi và đáp án.</small>
+            </span>
+          </button>
+        </div>
+
+        <div id="count-picker" class="count-picker" hidden>
+          <span class="field-label" data-i18n="questionCount">Số câu</span>
+          <div id="count-options" class="count-options"></div>
+        </div>
+
+        <button id="start-button" class="primary-button" type="button" disabled data-i18n="start">Bắt đầu</button>
+      </section>
+
+      <section class="content-section" aria-labelledby="materials-title">
+        <div class="section-heading">
+          <div>
+            <span class="section-number">03</span>
+            <h2 id="materials-title" data-i18n="readingMaterials">Tài liệu đọc</h2>
+          </div>
+          <p data-i18n="materialsHelp">Đọc bản tiếng Việt và mở phần Nhật gốc để đối chiếu.</p>
+        </div>
+        <div id="material-grid" class="material-grid"></div>
+      </section>
+    </section>
+
+    <section id="quiz-screen" class="screen" aria-labelledby="question-text">
+      <div class="workspace-card">
+        <div class="workspace-topbar">
+          <button id="exit-quiz-button" class="text-button" type="button" data-i18n="backToSetup">← Chọn lại</button>
+          <span id="quiz-topic-label" class="topic-pill"></span>
+          <div id="timer-box" class="timer-box" hidden aria-live="polite">
+            <span aria-hidden="true">◷</span>
+            <span id="timer-value">00:00</span>
+          </div>
+        </div>
+
+        <div class="progress-block">
+          <div class="progress-labels">
+            <span id="progress-label">Câu 1 / 25</span>
+            <span id="answered-label">0 đã trả lời</span>
+          </div>
+          <div class="progress-track"><div id="progress-fill" class="progress-fill"></div></div>
+        </div>
+
+        <article class="question-panel">
+          <p id="question-source" class="question-source"></p>
+          <h1 id="question-text" class="question-text"></h1>
+          <div id="options-container" class="options-container"></div>
+        </article>
+
+        <aside id="explanation-panel" class="explanation-panel" hidden aria-live="polite">
+          <strong data-i18n="explanation">Giải thích</strong>
+          <p id="explanation-text"></p>
+        </aside>
+
+        <div class="quiz-actions">
+          <button id="previous-button" class="secondary-button" type="button" data-i18n="previous">← Câu trước</button>
+          <div class="quiz-actions-right">
+            <button id="finish-exam-button" class="secondary-button danger-button" type="button" hidden data-i18n="submitExam">Nộp bài</button>
+            <button id="submit-answer-button" class="primary-button compact" type="button" disabled data-i18n="checkAnswer">Kiểm tra</button>
+            <button id="next-button" class="primary-button compact" type="button" hidden data-i18n="next">Câu tiếp →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="results-screen" class="screen" aria-labelledby="results-title">
+      <div class="results-card">
+        <span class="result-stamp" aria-hidden="true">結果</span>
+        <p class="eyebrow" data-i18n="completed">Đã hoàn thành</p>
+        <h1 id="results-title" data-i18n="results">Kết quả của bạn</h1>
+        <div class="score-ring" aria-label="Điểm số">
+          <strong id="score-percent">0%</strong>
+          <span id="score-fraction">0 / 0</span>
+        </div>
+        <div class="result-stats">
+          <div><strong id="correct-count">0</strong><span data-i18n="correct">Đúng</span></div>
+          <div><strong id="incorrect-count">0</strong><span data-i18n="incorrect">Sai</span></div>
+          <div><strong id="unanswered-count">0</strong><span data-i18n="unanswered">Chưa trả lời</span></div>
+          <div><strong id="time-spent">0:00</strong><span data-i18n="time">Thời gian</span></div>
+        </div>
+        <div class="result-actions">
+          <button id="retry-button" class="primary-button compact" type="button" data-i18n="retry">Làm lại</button>
+          <button id="back-setup-button" class="secondary-button" type="button" data-i18n="chooseAnother">Chọn bộ khác</button>
+        </div>
+      </div>
+      <section class="review-section" aria-labelledby="review-title">
+        <div class="section-heading">
+          <div><span class="section-number">復</span><h2 id="review-title" data-i18n="review">Xem lại câu sai</h2></div>
+        </div>
+        <div id="review-list" class="review-list"></div>
+      </section>
+    </section>
+
+    <section id="study-screen" class="screen" aria-labelledby="study-title">
+      <div class="study-header">
+        <button id="exit-study-button" class="text-button" type="button" data-i18n="backToSetup">← Chọn lại</button>
+        <div>
+          <p id="study-topic-label" class="eyebrow"></p>
+          <h1 id="study-title" data-i18n="study">Ôn tập</h1>
+        </div>
+      </div>
+      <label class="search-field" for="study-search">
+        <span aria-hidden="true">⌕</span>
+        <input id="study-search" type="search" data-i18n-placeholder="searchPlaceholder" placeholder="Tìm câu hỏi, lựa chọn hoặc đáp án…">
+      </label>
+      <p id="study-result-count" class="study-result-count" aria-live="polite"></p>
+      <div id="study-list" class="study-list"></div>
+    </section>
+  </main>
+</body>
+</html>
