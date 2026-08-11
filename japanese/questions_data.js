@@ -21514,12 +21514,12 @@ const JAPANESE_QUESTIONS = [
       },
       {
         "id": "B",
-        "vi": "Ối",
+        "vi": "OW",
         "ja": "ＯW"
       },
       {
         "id": "C",
-        "vi": "CV",
+        "vi": "OL",
         "ja": "ＯＬ"
       },
       {
@@ -21530,7 +21530,7 @@ const JAPANESE_QUESTIONS = [
     ],
     "correctOptionId": "C",
     "explanation": {
-      "vi": "Đáp án đúng: CV",
+      "vi": "Đáp án đúng: OL",
       "ja": "正解：ＯＬ"
     }
   },

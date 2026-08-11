@@ -5420,11 +5420,11 @@ Từ chỉ nữ nhân viên văn phòng là gì?
 
    *Nhật gốc:* ＢＬ
 
-2. Ối
+2. OW
 
    *Nhật gốc:* ＯW
 
-3. CV
+3. OL
 
    *Nhật gốc:* ＯＬ
 
