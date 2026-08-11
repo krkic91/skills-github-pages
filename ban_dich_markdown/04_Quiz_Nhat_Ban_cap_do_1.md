@@ -3294,11 +3294,11 @@ Máy game nào không phải của hãng Nhật?
 
    *Nhật gốc:* PS2
 
-3. khối trò chơi
+3. Game Cube
 
    *Nhật gốc:* ゲームキューブ
 
-4. cậu bé trò chơi
+4. Game Boy
 
    *Nhật gốc:* ゲームボーイ
 
@@ -3432,7 +3432,7 @@ Tổng số người của đội bóng đá + bóng chày + bóng chuyền?
 
 **Nguồn:** Trang PDF 13
 
-Trong o-an-từ-ti, tháng Keo là gì?
+Trong oẳn tù tì, thắng kéo là gì?
 
 > **Nhật gốc:** じゃんけんでに勝つのは何ですか。
 
