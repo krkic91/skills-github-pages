@@ -1,9 +1,10 @@
 # Learning Hub
 
-Static GitHub Pages website with two independent learning modules:
+Static GitHub Pages website with three independent learning modules:
 
 - **GitHub Copilot GH-300** – 125 questions in English, Vietnamese, and Japanese, with Practice, Exam, and Study modes.
 - **Học về Nhật Bản** – 1,192 bilingual Vietnamese/Japanese questions across 8 quiz topics, plus 2 reading materials.
+- **English Foundation** – 66 structured English documents across EF1 and EF2, covering 760 source pages.
 
 ## Project structure
 
@@ -19,9 +20,23 @@ Static GitHub Pages website with two independent learning modules:
 │   ├── questions_data.js       # Generated; do not edit manually
 │   ├── style.css
 │   └── topics.js               # Generated; do not edit manually
+├── english/                    # English Foundation catalog and reader
+│   ├── assets/                 # Generated instructional visuals (when needed)
+│   ├── content/                # Generated index + 66 Markdown documents
+│   │   ├── 00_INDEX.md
+│   │   ├── ef1/
+│   │   └── ef2/
+│   ├── app.js
+│   ├── catalog.js              # Generated; do not edit manually
+│   ├── extraction-report.json  # Generated extraction audit report
+│   ├── index.html
+│   ├── reader.html
+│   └── style.css
 ├── scripts/
-│   └── build-japanese-data.mjs
-└── ban_dich_markdown/          # Source Markdown content
+│   ├── build-japanese-data.mjs
+│   ├── extract-english-markdown.py
+│   └── build-english-data.mjs
+└── ban_dich_markdown/          # Japanese Markdown and English source PDFs
 ```
 
 ## Build Japanese data
@@ -50,11 +65,36 @@ Skipped: 0
 Errors: 0
 ```
 
+## Build English data
+
+Extract the source PDFs into structured Markdown, then validate all documents and generate the browser-ready catalog:
+
+```powershell
+python scripts/extract-english-markdown.py
+node scripts/build-english-data.mjs
+```
+
+The extractor requires Python 3 and [PyMuPDF](https://pymupdf.readthedocs.io/) at build time (`python -m pip install pymupdf` if it is not already installed). It regenerates `english/content/`, `english/extraction-report.json`, and any selected instructional images under `english/assets/`. The Node.js build validates the 6 EF1 documents, all 60 EF2 lessons, canonical IDs and paths, page markers, local references, and the 760-page metadata total before generating `english/catalog.js`.
+
+`english/content/`, `english/assets/`, `english/extraction-report.json`, and `english/catalog.js` are generated outputs and should not be edited manually. Both scripts run only at build time; the published site has no package or backend dependency.
+
+Expected validation result:
+
+```text
+EF1: 6 documents
+EF2 Module 01: 20 lessons
+EF2 Module 02: 20 lessons
+EF2 Module 03: 20 lessons
+Total: 66 documents
+Source pages: 760
+Errors: 0
+```
+
 ## Run locally
 
 All application data is loaded through regular script tags, so the pages can be opened directly or served with any static web server. No backend is required.
 
-Open `index.html`, then use the two module links. Before publishing changes to the Markdown sources, rerun the Node.js build command and commit the regenerated files.
+Open `index.html`, then use any of the three module links. Before publishing source changes, rerun the corresponding build command and commit the regenerated static files.
 
 ## Deployment
 

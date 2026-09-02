@@ -8,6 +8,8 @@
   --purple: #7367f0;
   --purple-dark: #181629;
   --red: #b5232c;
+  --teal: #4ed6bd;
+  --teal-dark: #0d2c34;
   --paper: #fffdfa;
   --radius: 30px;
   --font-title: 'Manrope', sans-serif;
@@ -25,6 +27,7 @@ body {
   background:
     radial-gradient(circle at 80% 5%, rgba(115, 103, 240, 0.08), transparent 30rem),
     radial-gradient(circle at 5% 75%, rgba(181, 35, 44, 0.07), transparent 28rem),
+    radial-gradient(circle at 70% 95%, rgba(78, 214, 189, 0.07), transparent 28rem),
     var(--bg);
   font-family: var(--font-body);
 }
@@ -140,7 +143,7 @@ main {
 
 .modules {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.2rem;
 }
 
@@ -170,6 +173,10 @@ main {
   color: var(--ink);
   border: 1px solid rgba(181, 35, 44, 0.16);
   background: linear-gradient(155deg, #fffefb, #f4e9e4);
+}
+
+.english-card {
+  background: linear-gradient(155deg, #17484b 0%, var(--teal-dark) 62%, #091d24 100%);
 }
 
 .module-number {
@@ -216,6 +223,48 @@ main {
   place-items: center;
 }
 
+.english-visual {
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(156, 232, 215, 0.14);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, rgba(78, 214, 189, 0.22), transparent 55%),
+    repeating-radial-gradient(circle, transparent 0 27px, rgba(156, 232, 215, 0.07) 28px 29px);
+}
+
+.english-visual::before,
+.english-visual::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  content: '';
+  border: 1px solid rgba(156, 232, 215, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.english-visual::before {
+  width: 68%;
+  height: 68%;
+}
+
+.english-visual::after {
+  width: 42%;
+  height: 42%;
+}
+
+.english-monogram {
+  position: relative;
+  z-index: 1;
+  color: #9ce8d7;
+  font-family: var(--font-title);
+  font-size: clamp(4rem, 8vw, 6.8rem);
+  font-weight: 800;
+  letter-spacing: -0.1em;
+  text-shadow: 0 0 32px rgba(78, 214, 189, 0.42);
+}
+
 .sun {
   position: absolute;
   width: 76%;
@@ -252,6 +301,10 @@ main {
 
 .japan-card .module-kicker {
   color: var(--red);
+}
+
+.english-card .module-kicker {
+  color: #9ce8d7;
 }
 
 .module-content h2 {
@@ -336,6 +389,18 @@ footer {
   font-size: 0.72rem;
 }
 
+@media (max-width: 1100px) {
+  .modules {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 1101px) and (max-width: 1200px) {
+  .module-content h2 {
+    font-size: clamp(2rem, 3.7vw, 2.75rem);
+  }
+}
+
 @media (max-width: 820px) {
   .hero {
     grid-template-columns: 1fr;
@@ -344,10 +409,6 @@ footer {
 
   .eyebrow {
     margin-bottom: 0;
-  }
-
-  .modules {
-    grid-template-columns: 1fr;
   }
 
   .module-card {

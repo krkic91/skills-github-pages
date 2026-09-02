@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Read an English Foundation document.">
+  <meta name="theme-color" content="#102a43">
+  <title>Reader | English Foundation</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="catalog.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body data-page="reader">
+  <a class="skip-link" href="#document-content">Skip to document</a>
+
+  <header class="site-header reader-site-header">
+    <div class="shell header-inner">
+      <a class="home-link" href="./index.html" aria-label="Back to English Foundation catalog">
+        <span aria-hidden="true">&larr;</span>
+        <span>All documents</span>
+      </a>
+      <a class="brand" href="./index.html" aria-label="English Foundation catalog">
+        <span class="brand-mark" aria-hidden="true">EF</span>
+        <span>English Foundation</span>
+      </a>
+      <a class="header-note header-home" href="../index.html">Learning Hub</a>
+    </div>
+  </header>
+
+  <main id="main-content" class="reader-main shell">
+    <section id="reader-error" class="reader-error notice notice-error" role="alert" hidden>
+      <p class="eyebrow">Reader unavailable</p>
+      <h1 id="reader-error-title">Document not found</h1>
+      <p id="reader-error-message">Return to the catalog and choose a document to read.</p>
+      <a class="primary-button" href="./index.html">Browse the library</a>
+    </section>
+
+    <div id="reader-view" hidden>
+      <nav id="breadcrumbs" class="breadcrumbs" aria-label="Breadcrumb"></nav>
+
+      <header class="document-header">
+        <div>
+          <p id="document-kicker" class="eyebrow"></p>
+          <h1 id="document-title"></h1>
+          <p id="document-source" class="document-source"></p>
+        </div>
+        <dl class="document-facts" aria-label="Document details">
+          <div><dt>Level</dt><dd id="fact-level"></dd></div>
+          <div><dt>Module</dt><dd id="fact-module"></dd></div>
+          <div><dt>Pages</dt><dd id="fact-pages"></dd></div>
+        </dl>
+      </header>
+
+      <section class="document-search" aria-labelledby="document-search-label">
+        <label id="document-search-label" for="document-search-input">
+          <span class="search-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Search within this document</span>
+        </label>
+        <input id="document-search-input" type="search" autocomplete="off" placeholder="Find in this document&hellip;">
+        <output id="document-search-count" for="document-search-input" aria-live="polite">0 matches</output>
+        <div class="match-controls">
+          <button id="previous-match" type="button" aria-label="Previous search match" disabled>&uarr;</button>
+          <button id="next-match" type="button" aria-label="Next search match" disabled>&darr;</button>
+        </div>
+      </section>
+
+      <div class="reader-layout">
+        <aside class="toc-sidebar" aria-label="Document table of contents">
+          <details id="toc-panel" open>
+            <summary>
+              <span>On this page</span>
+              <span class="toc-toggle" aria-hidden="true"></span>
+            </summary>
+            <nav id="table-of-contents" class="table-of-contents" aria-label="On this page"></nav>
+          </details>
+        </aside>
+
+        <article id="document-content" class="markdown-body" tabindex="-1"></article>
+      </div>
+
+      <nav class="document-navigation" aria-label="Document navigation">
+        <a id="previous-document" class="document-nav-link previous" href="#">
+          <span class="document-nav-direction">&larr; Previous</span>
+          <strong></strong>
+          <small></small>
+        </a>
+        <a id="next-document" class="document-nav-link next" href="#">
+          <span class="document-nav-direction">Next &rarr;</span>
+          <strong></strong>
+          <small></small>
+        </a>
+      </nav>
+    </div>
+  </main>
+
+  <button id="back-to-top" class="back-to-top" type="button" aria-label="Back to top" hidden>&uarr;</button>
+
+  <footer class="site-footer reader-footer">
+    <div class="shell">
+      <a href="./index.html">English Foundation library</a>
+      <span>Static site &middot; GitHub Pages</span>
+    </div>
+  </footer>
+</body>
+</html>
