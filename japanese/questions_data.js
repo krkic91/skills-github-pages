@@ -18892,12 +18892,12 @@ const JAPANESE_QUESTIONS = [
       },
       {
         "id": "C",
-        "vi": "khối trò chơi",
+        "vi": "Game Cube",
         "ja": "ゲームキューブ"
       },
       {
         "id": "D",
-        "vi": "cậu bé trò chơi",
+        "vi": "Game Boy",
         "ja": "ゲームボーイ"
       }
     ],
@@ -19061,7 +19061,7 @@ const JAPANESE_QUESTIONS = [
     "number": 115,
     "source": "Trang PDF 13",
     "question": {
-      "vi": "Trong o-an-từ-ti, tháng Keo là gì?",
+      "vi": "Trong oẳn tù tì, thắng kéo là gì?",
       "ja": "じゃんけんでに勝つのは何ですか。"
     },
     "options": [
@@ -21514,12 +21514,12 @@ const JAPANESE_QUESTIONS = [
       },
       {
         "id": "B",
-        "vi": "Ối",
+        "vi": "OW",
         "ja": "ＯW"
       },
       {
         "id": "C",
-        "vi": "CV",
+        "vi": "OL",
         "ja": "ＯＬ"
       },
       {
@@ -21530,7 +21530,7 @@ const JAPANESE_QUESTIONS = [
     ],
     "correctOptionId": "C",
     "explanation": {
-      "vi": "Đáp án đúng: CV",
+      "vi": "Đáp án đúng: OL",
       "ja": "正解：ＯＬ"
     }
   },

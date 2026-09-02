@@ -416,6 +416,7 @@ function updateSelectionPanel() {
     renderCountOptions();
   } else {
     document.getElementById('count-picker').hidden = true;
+    document.getElementById('count-options').replaceChildren();
   }
 
   startButton.disabled = !topic || !state.mode || (state.mode !== 'study' && state.questionLimit === null);
