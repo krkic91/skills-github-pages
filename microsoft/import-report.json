@@ -1,0 +1,144 @@
+{
+  "AI-103": 135,
+  "AB-100": 114,
+  "total": 249,
+  "images": 57,
+  "missingImages": [
+    {
+      "exam": "AB-100",
+      "image": "ab100_9.jpg"
+    },
+    {
+      "exam": "AB-100",
+      "image": "ab100_11.jpg"
+    },
+    {
+      "exam": "AB-100",
+      "image": "ab100_13.jpg"
+    },
+    {
+      "exam": "AB-100",
+      "image": "ab100_14.jpg"
+    },
+    {
+      "exam": "AB-100",
+      "image": "ab100_19.jpg"
+    },
+    {
+      "exam": "AB-100",
+      "image": "ab100_20.jpg"
+    },
+    {
+      "exam": "AB-100",
+      "image": "ab100_21.jpg"
+    },
+    {
+      "exam": "AB-100",
+      "image": "ab100_25.jpg"
+    },
+    {
+      "exam": "AB-100",
+      "image": "ab100_1.jpg"
+    },
+    {
+      "exam": "AB-100",
+      "image": "ab100_30.jpg"
+    },
+    {
+      "exam": "AB-100",
+      "image": "ab100_31_a.jpg"
+    },
+    {
+      "exam": "AB-100",
+      "image": "ab100_31_b.jpg"
+    },
+    {
+      "exam": "AB-100",
+      "image": "ab100_35.jpg"
+    },
+    {
+      "exam": "AB-100",
+      "image": "ab100_47.jpg"
+    },
+    {
+      "exam": "AB-100",
+      "image": "ab100_50.jpg"
+    },
+    {
+      "exam": "AB-100",
+      "image": "ab100_54.jpg"
+    },
+    {
+      "exam": "AB-100",
+      "image": "ab100_55.png"
+    },
+    {
+      "exam": "AB-100",
+      "image": "ab100_60.png"
+    },
+    {
+      "exam": "AB-100",
+      "image": "ab100_63.jpg"
+    },
+    {
+      "exam": "AB-100",
+      "image": "ab100_70.jpg"
+    },
+    {
+      "exam": "AB-100",
+      "image": "ab100_76.jpg"
+    },
+    {
+      "exam": "AB-100",
+      "image": "ab100_82.jpg"
+    },
+    {
+      "exam": "AB-100",
+      "image": "ab100_87.jpg"
+    },
+    {
+      "exam": "AB-100",
+      "image": "ab100_88.jpg"
+    },
+    {
+      "exam": "AB-100",
+      "image": "ab100_90.jpg"
+    },
+    {
+      "exam": "AB-100",
+      "image": "ab100_93.jpg"
+    },
+    {
+      "exam": "AB-100",
+      "image": "ab100_94.jpg"
+    },
+    {
+      "exam": "AB-100",
+      "image": "ab100_95.jpg"
+    },
+    {
+      "exam": "AB-100",
+      "image": "ab100_96.jpg"
+    },
+    {
+      "exam": "AB-100",
+      "image": "ab100_101.jpg"
+    },
+    {
+      "exam": "AB-100",
+      "image": "ab100_103.jpg"
+    },
+    {
+      "exam": "AB-100",
+      "image": "ab100_104.jpg"
+    },
+    {
+      "exam": "AB-100",
+      "image": "ab100_112.jpg"
+    },
+    {
+      "exam": "AB-100",
+      "image": "ab100_114.jpg"
+    }
+  ]
+}

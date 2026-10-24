@@ -143,7 +143,7 @@ main {
 
 .modules {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.2rem;
 }
 
@@ -177,6 +177,19 @@ main {
 
 .english-card {
   background: linear-gradient(155deg, #17484b 0%, var(--teal-dark) 62%, #091d24 100%);
+}
+
+.microsoft-card {
+  background: linear-gradient(155deg, #154b83, #102943 65%, #0a192c);
+}
+
+.microsoft-visual {
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(93, 188, 255, .3), transparent 65%);
+  color: #93d2ff;
+  font: 800 clamp(4rem, 8vw, 7rem) var(--font-title);
 }
 
 .module-number {

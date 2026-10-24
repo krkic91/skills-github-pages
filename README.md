@@ -1,10 +1,24 @@
 # Learning Hub
 
-Static GitHub Pages website with three independent learning modules:
+Static GitHub Pages website with five independent learning modules:
 
 - **GitHub Copilot GH-300** – 125 questions in English, Vietnamese, and Japanese, with Practice, Exam, and Study modes.
 - **Học về Nhật Bản** – 1,192 bilingual Vietnamese/Japanese questions across 8 quiz topics, plus 2 reading materials.
 - **English Foundation** – 66 structured English documents across EF1 and EF2, covering 760 source pages.
+- **Microsoft AI-103** – 135 questions on its own practice page.
+- **Microsoft AB-100** – 114 questions on its own practice page.
+
+Both Microsoft modules offer practice, answer review, search, and Vietnamese explanations. Each page loads its own question bank and is linked directly from the landing page.
+
+## Import Microsoft questions
+
+```powershell
+python scripts/import-microsoft-questions.py 'C:\path\AI_103.html' 'C:\path\Practice Session · Practice Cert.html'
+```
+
+The importer requires BeautifulSoup 4 (`python -m pip install beautifulsoup4`). Keep each saved page's companion `_files` folder beside its HTML file. It extracts question content, options, answer keys, substantive explanations, and referenced images into `microsoft/`. Navigation, tracking scripts, donation prompts, Ask AI buttons, repeated explanation summaries, and case study navigation instructions are omitted. Scenario context, requirements, code, tables, and answer instructions are retained.
+
+The generated `microsoft/ai-103-questions.js`, `microsoft/ab-100-questions.js`, `microsoft/assets/`, and `microsoft/import-report.json` are committed static outputs. The current sources contain 249 questions and 57 available images. The AB-100 saved page references 34 missing images; placeholders identify those gaps and the report lists their filenames. Answer keys and explanations are preserved from the supplied sources and have not been independently fact-checked.
 
 ## Project structure
 
@@ -94,7 +108,7 @@ Errors: 0
 
 All application data is loaded through regular script tags, so the pages can be opened directly or served with any static web server. No backend is required.
 
-Open `index.html`, then use any of the three module links. Before publishing source changes, rerun the corresponding build command and commit the regenerated static files.
+Open `index.html`, then use any of the five module links. Before publishing source changes, rerun the corresponding build command and commit the regenerated static files.
 
 ## Deployment
 
