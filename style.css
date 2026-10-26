@@ -183,6 +183,10 @@ main {
   background: linear-gradient(155deg, #154b83, #102943 65%, #0a192c);
 }
 
+.claude-card {
+  background: linear-gradient(155deg, #5a2e21 0%, #2b1712 64%, #160d09 100%);
+}
+
 .microsoft-visual {
   display: grid;
   place-items: center;
@@ -190,6 +194,104 @@ main {
   background: radial-gradient(circle, rgba(93, 188, 255, .3), transparent 65%);
   color: #93d2ff;
   font: 800 clamp(4rem, 8vw, 7rem) var(--font-title);
+}
+
+.claude-visual {
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 220, 200, 0.11);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, rgba(240, 160, 110, 0.3), transparent 64%),
+    repeating-radial-gradient(circle, transparent 0 26px, rgba(255, 220, 200, 0.06) 27px 28px);
+}
+
+.claude-visual span {
+  color: #ffd1ba;
+  font: 800 clamp(3.8rem, 8vw, 6.2rem) var(--font-title);
+  letter-spacing: -0.12em;
+  text-shadow: 0 0 32px rgba(240, 160, 110, 0.38);
+}
+
+.claude-card .module-kicker {
+  color: #f2a77d;
+}
+
+.ccao-card {
+  background: linear-gradient(155deg, #123c36 0%, #0c2724 64%, #071513 100%);
+}
+
+.ccao-card .module-kicker {
+  color: #8de3cf;
+}
+
+.ccao-visual {
+  border-color: rgba(141, 227, 207, 0.12);
+  background:
+    radial-gradient(circle, rgba(88, 218, 191, 0.28), transparent 64%),
+    repeating-radial-gradient(circle, transparent 0 26px, rgba(196, 255, 242, 0.06) 27px 28px);
+}
+
+.ccao-visual span {
+  color: #aff5e3;
+  text-shadow: 0 0 32px rgba(88, 218, 191, 0.4);
+}
+
+.ccdv-card {
+  background: linear-gradient(155deg, #382052 0%, #231330 64%, #120b19 100%);
+}
+
+.ccdv-card .module-kicker {
+  color: #d7b6ff;
+}
+
+.ccdv-visual {
+  border-color: rgba(215, 182, 255, 0.12);
+  background:
+    radial-gradient(circle, rgba(166, 112, 255, 0.3), transparent 64%),
+    repeating-radial-gradient(circle, transparent 0 26px, rgba(232, 215, 255, 0.06) 27px 28px);
+}
+
+.ccdv-visual span {
+  color: #e5d3ff;
+  text-shadow: 0 0 32px rgba(166, 112, 255, 0.42);
+}
+
+.ccarf-card {
+  background: linear-gradient(155deg, #1c3550 0%, #112235 64%, #09131f 100%);
+}
+
+.ccarf-card .module-kicker {
+  color: #a9d7ff;
+}
+
+.ccarf-visual {
+  border-color: rgba(169, 215, 255, 0.12);
+  background:
+    radial-gradient(circle, rgba(74, 158, 244, 0.3), transparent 64%),
+    repeating-radial-gradient(circle, transparent 0 26px, rgba(204, 233, 255, 0.06) 27px 28px);
+}
+
+.ccarf-visual span {
+  color: #c8e8ff;
+  text-shadow: 0 0 32px rgba(74, 158, 244, 0.42);
+}
+
+@media (min-width: 1101px) {
+  .ccarf-card {
+    grid-column: 1 / -1;
+    min-height: 500px;
+  }
+
+  .ccarf-card .module-visual {
+    top: 2rem;
+    right: 2.5rem;
+    width: 32%;
+  }
+
+  .ccarf-card .module-content {
+    max-width: 58%;
+  }
 }
 
 .module-number {

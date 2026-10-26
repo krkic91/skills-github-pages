@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html lang="vi">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Luyện tập 95 câu hỏi Claude Certified Developer – Foundations (CCDV-F) với đáp án và giải thích." name="description"/>
+<title>Claude Developer Foundations (CCDV-F) | Learning Hub</title>
+<link href="style.css" rel="stylesheet"/>
+<script defer="" src="ccdv-f-questions.js"></script>
+<script defer="" src="app.js"></script>
+</head>
+<body>
+<header class="site-header"><a class="brand" href="../index.html"><span class="brand-symbol">L</span> Learning Hub</a><a class="github-link" href="../index.html">← Trang chủ</a></header>
+<main>
+<section class="intro">
+<p class="eyebrow">Anthropic CCDV-F · Certification prep</p>
+<h1>Claude Developer – Foundations</h1>
+<p>95 câu hỏi Claude Certified Developer – Foundations, chia thành 2 set (53 và 42 câu), kèm đáp án và giải thích.</p>
+<p class="source-note">Nội dung, đáp án và giải thích được đồng bộ từ CertLab ngày 26/10/2026; nội dung chưa được kiểm chứng độc lập.</p>
+<nav aria-label="Chuyển giữa các bộ đề Claude" class="module-nav">
+<a href="ccar-p.html">CCAR-P gốc <span>113 câu · 2 set</span></a>
+<a href="mock-test/index.html">Mock Test <span>330 câu · 6 set</span></a>
+<a href="ccao-f.html">CCAO-F <span>109 câu · 2 set</span></a>
+<a aria-current="page" href="ccdv-f.html">CCDV-F <span>95 câu · 2 set</span></a>
+<a href="ccar-f.html">CCAR-F <span>179 câu · 3 set</span></a>
+</nav>
+</section>
+<section aria-label="Bộ lọc câu hỏi" class="toolbar">
+<label>Bộ đề<select id="set-filter"><option value="all">Tất cả 95 câu</option><option value="1">Set 1 · 53 câu</option><option value="2">Set 2 · 42 câu</option></select></label>
+<label>Chế độ<select id="mode"><option value="practice">Luyện tập</option><option value="study">Đọc đáp án</option></select></label>
+<label class="search">Tìm câu hỏi<input id="search" placeholder="Nhập từ khóa…" type="search"/></label>
+</section>
+<p aria-live="polite" id="progress" role="status"></p>
+<div class="workspace">
+<nav aria-label="Danh sách câu hỏi" id="question-map"></nav>
+<section aria-label="Nội dung câu hỏi" id="question-area">
+<article id="question-card">
+<div class="question-heading"><span id="question-label"></span><span id="selection-hint"></span></div>
+<div id="question-content"></div>
+<form id="answer-form"><fieldset id="options"><legend class="sr-only">Chọn đáp án</legend></fieldset><button id="check" type="submit">Kiểm tra đáp án</button></form>
+<section aria-label="Đáp án và giải thích" hidden="" id="feedback"><p aria-live="polite" id="result" role="status"></p><div id="explanation"></div></section>
+<div class="navigation"><button id="prev" type="button">← Câu trước</button><button id="next" type="button">Câu tiếp →</button></div>
+</article>
+<p hidden="" id="empty">Không có câu hỏi phù hợp. Hãy thử từ khóa hoặc bộ đề khác.</p>
+</section>
+</div>
+</main>
+</body>
+</html>

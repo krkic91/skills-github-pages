@@ -1,20 +1,38 @@
 # Learning Hub
 
-Static GitHub Pages website with five independent learning modules:
+Static GitHub Pages website with nine independent learning modules:
 
 - **GitHub Copilot GH-300** – 125 questions in English, Vietnamese, and Japanese, with Practice, Exam, and Study modes.
 - **Học về Nhật Bản** – 1,192 bilingual Vietnamese/Japanese questions across 8 quiz topics, plus 2 reading materials.
 - **English Foundation** – 66 structured English documents across EF1 and EF2, covering 760 source pages.
 - **Microsoft AI-103** – 135 questions on its own practice page.
 - **Microsoft AB-100** – 114 questions on its own practice page.
+- **Claude CCAR-P** – 113-question original bank plus a separate 330-question Mock Test child module.
+- **Anthropic CCAO-F** – 109 questions across two practice sets.
+- **Claude CCDV-F** – 95 Claude Certified Developer – Foundations questions.
+- **Claude CCAR-F** – 179 Claude Certified Architect – Foundations questions.
 
-Both Microsoft modules offer practice, answer review, search, and Vietnamese explanations. Each page loads its own question bank and is linked directly from the landing page.
+The Microsoft and Claude modules offer practice, answer review, and search. Most include Vietnamese source explanations; the CCAO-F source does not provide explanations. Each page loads its own question bank and is linked directly from the landing page.
 
 ## Microsoft question banks
 
 `microsoft/ai-103.html` and `microsoft/ab-100.html` load their respective question banks from `microsoft/ai-103-questions.js` and `microsoft/ab-100-questions.js`, with shared images under `microsoft/assets/`. These are static files with no Python dependency.
 
 The supplied sources contain 249 questions and 57 available images. The AB-100 saved page references 34 missing images; placeholders identify those gaps. Answer keys and explanations are preserved from the supplied sources and have not been independently fact-checked.
+
+## Claude question banks
+
+`claude/ccar-p.html` is the original question bank and loads `claude/ccar-p-questions.js` with 113 questions across two sets (63 and 50). It supports single-answer, multiple-answer, and matching questions.
+
+`claude/mock-test/index.html` is a separate child module with 330 additional questions across six sets: Sets 1–5 have 63 questions each and Set 6 has 15. It loads `claude/mock-test/questions.js` and reuses `claude/app.js` and `claude/style.css`. The two banks have no overlapping normalized question text.
+
+`claude/ccao-f.html` loads 109 Anthropic CCAO-F questions across two sets (60 and 49), including 81 single-answer and 28 multiple-answer questions. CertLab does not provide source explanations for this bank, so all 109 questions display a clearly marked fallback note.
+
+`claude/ccdv-f.html` loads 95 Claude Certified Developer – Foundations questions across two sets (53 and 42). All questions are single-answer and include source explanations.
+
+`claude/ccar-f.html` loads 179 Claude Certified Architect – Foundations questions across three sets (60, 60, and 59). All questions are single-answer and include source explanations.
+
+The question content, answer keys, and available Vietnamese explanations were synced from CertLab on 2026-10-26 and have not been independently fact-checked. The original CCAR-P bank has 6 questions without a source explanation; all Mock Test, CCDV-F, and CCAR-F questions include a source explanation.
 
 ## Project structure
 
@@ -41,6 +59,20 @@ The supplied sources contain 249 questions and 57 available images. The AB-100 s
 │   ├── extraction-report.json  # Generated extraction audit report
 │   ├── index.html
 │   ├── reader.html
+│   └── style.css
+├── claude/                    # Claude certification question banks
+│   ├── app.js
+│   ├── ccar-p-questions.js    # Original 113-question bank
+│   ├── ccar-p.html            # Original bank UI
+│   ├── ccao-f-questions.js    # Anthropic CCAO-F bank
+│   ├── ccao-f.html            # CCAO-F UI
+│   ├── ccdv-f-questions.js    # Claude Developer Foundations bank
+│   ├── ccdv-f.html            # CCDV-F UI
+│   ├── ccar-f-questions.js    # Claude Architect Foundations bank
+│   ├── ccar-f.html            # CCAR-F UI
+│   ├── mock-test/
+│   │   ├── index.html         # Mock Test child module
+│   │   └── questions.js       # Additional 330-question bank
 │   └── style.css
 ├── scripts/
 │   ├── build-japanese-data.mjs
@@ -104,7 +136,7 @@ Errors: 0
 
 All application data is loaded through regular script tags, so the pages can be opened directly or served with any static web server. No backend is required.
 
-Open `index.html`, then use any of the five module links. Before publishing source changes, rerun the corresponding build command and commit the regenerated static files.
+Open `index.html`, then use any of the nine module links. Before publishing source changes, rerun the corresponding build command and commit the regenerated static files.
 
 ## Deployment
 
